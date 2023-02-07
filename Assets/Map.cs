@@ -15,18 +15,12 @@ public class Map
 
     public class Element
     {
-        public TileStatus Status = TileStatus.Unbekant;
         public int Cost = -1;
         public int Belonung = -1;
         public Vector2Int Vorheriger;
-
-        public Element(TileStatus StatusIn) 
-        {
-            Status = StatusIn;
-        }
     }
 
-    private Element[,] Karte;
+    private TileStatus[,] Karte;
     private int ovsetWidth;
     private int ovsetHeight;
 
@@ -34,10 +28,10 @@ public class Map
     {
         ovsetWidth = Width / 2;
         ovsetHeight = Height / 2;
-        Karte = new Element[Width, Height];
+        Karte = new TileStatus[Width, Height];
     }
 
-    public Element this[int Width, int Height]
+    public TileStatus this[int Width, int Height]
     {
         get
         {
