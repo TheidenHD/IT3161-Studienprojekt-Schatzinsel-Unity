@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Pirate : MonoBehaviour
 {
-    public float speed = 2f;
-    public int sicht = 2;
+    private float speed;
+    private float sicht;
     public Vector2[] path;
-    public int currentIndex;
+    public Animator animator;
+    private int currentIndex;
     public Team team;
 
     private Vector3 destination;
@@ -17,6 +16,9 @@ public class Pirate : MonoBehaviour
         destination = transform.position;
         currentIndex = 0;
         team.check(0, 0);
+        sicht = Random.Range(2, 5);
+        speed = ((float)Random.Range(10, 21)) / 10;
+        team.check((int)destination.x, (int)destination.y);
     }
 
     void Update()
@@ -27,10 +29,9 @@ public class Pirate : MonoBehaviour
         }
         else
         {
-            team.check((int)destination.x, (int)destination.y);
-            for (int i = 0; i < sicht; i++)
+            for (int i = 0; i < sicht / 2; i++)
             {
-                for (int j = 1; j <= sicht - i; j++)
+                for (int j = 1; j <= (sicht - i) / 2; j++)
                 {
                     team.check((int)destination.x + i, (int)destination.y + j);
                     team.check((int)destination.x - i, (int)destination.y - j);
@@ -41,7 +42,12 @@ public class Pirate : MonoBehaviour
             if (currentIndex < path.Length)
             {
                 destination = path[currentIndex];
-                currentIndex++; 
+                currentIndex++;
+                Vector3 temp = destination - transform.position;
+                animator.SetFloat("LEFT/RIGHT", temp.x);
+                animator.SetFloat("UP/Down", temp.y);
+
+
             }
         }
     }
