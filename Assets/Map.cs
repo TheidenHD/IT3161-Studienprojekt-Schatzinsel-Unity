@@ -43,4 +43,8 @@ public class Map
             Karte[Width + ovsetWidth, Height + ovsetHeight] = value;
         }
     }
+    public bool test(int Width, int Height)
+    {
+        return Width + ovsetWidth >= 0 && Width + ovsetWidth < Karte.GetLength(0) && Height + ovsetHeight >= 0 && Height + ovsetHeight < Karte.GetLength(1);
+    }
 }

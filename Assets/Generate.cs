@@ -20,9 +20,13 @@ public class Generate : MonoBehaviour
     [SerializeField]
     public static int Pirates = 1;
     [SerializeField]
+    public static bool hide = true;
+    [SerializeField]
     private Tilemap Map;
     [SerializeField]
     private Tilemap Objekts;
+    [SerializeField]
+    private Tilemap Hiden;
     [SerializeField]
     private TileBase[] Tile;
     [SerializeField]
@@ -37,12 +41,16 @@ public class Generate : MonoBehaviour
         nav = new Map(Width - 2, Height - 2);
         List<Team> team =  new List<Team>();
         for (int i = 0; i < Teams; i++)
-            team.Add(new Team(Width - 2, Height - 2, nav));
+            team.Add(new Team(Width - 2, Height - 2, nav, Hiden));
         foreach (int i in Enumerable.Range(-9, 18))
         {
             foreach (int j in Enumerable.Range(-4, 8))
             {
                 Map.SetTile(new Vector3Int(i, j, 0), Tile[3]);
+                if (hide)
+                {
+                    Hiden.SetTile(new Vector3Int(i, j, 0), Tile[5]);
+                }
                 if (Random.Range(0, 100) > 95)
                 {
                     Objekts.SetTile(new Vector3Int(i, j, 0), Tile[2]);
