@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Pirate : MonoBehaviour
 {
     private float speed;
     private float sicht;
-    public Vector2[] path;
+    public List<Vector2> path;
     public Animator animator;
     private int currentIndex;
     public Team team;
@@ -41,7 +42,7 @@ public class Pirate : MonoBehaviour
                     team.check((int)destination.x - j, (int)destination.y + i);
                 }
             }
-            if (currentIndex < path.Length)
+            if (currentIndex < path.Count)
             {
                 destination = path[currentIndex];
                 currentIndex++;
@@ -60,6 +61,6 @@ public class Pirate : MonoBehaviour
     {
         currentIndex = 0;
         //Generate new Path
-        path = new Vector2[0];
+        path = new List<Vector2>();
     }
 }

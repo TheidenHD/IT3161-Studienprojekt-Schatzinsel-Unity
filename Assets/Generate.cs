@@ -54,10 +54,6 @@ public class Generate : MonoBehaviour
             foreach (int j in Enumerable.Range((Height - 2) / -2, Height - 2))
             {
                 Map.SetTile(new Vector3Int(i, j, 0), Tile[3]);
-                if (hide)
-                {
-                    Hiden.SetTile(new Vector3Int(i, j, 0), Tile[5]);
-                }
                 if (Random.Range(0, 100) > 95)
                 {
                     Objekts.SetTile(new Vector3Int(i, j, 0), Tile[2]);
@@ -74,6 +70,17 @@ public class Generate : MonoBehaviour
                     {
                         p.map[i, j] = new Element();
                     }
+                }
+            }
+        }
+
+        if (hide)
+        {
+            foreach (int i in Enumerable.Range(Width / -2, Width))
+            {
+                foreach (int j in Enumerable.Range(Height / -2, Height))
+                {
+                    Hiden.SetTile(new Vector3Int(i, j, 0), Tile[7]);
                 }
             }
         }

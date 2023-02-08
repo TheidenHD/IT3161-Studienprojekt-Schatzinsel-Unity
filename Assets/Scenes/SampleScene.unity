@@ -196,12 +196,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: -86145973, guid: 2eb57d0f3cb8c984eb4242cf00d759f2, type: 3}
+  m_Sprite: {fileID: -116312762, guid: 2eb57d0f3cb8c984eb4242cf00d759f2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.733
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -643,13 +643,14 @@ MonoBehaviour:
   Objekts: {fileID: 1865847161}
   Hiden: {fileID: 685349572}
   Tile:
-  - {fileID: 11400000, guid: 09f43b06ea753ff4ab07bab1d5705f0d, type: 2}
-  - {fileID: 11400000, guid: cf3ca82399855a44080db7b0e92e009d, type: 2}
-  - {fileID: 11400000, guid: 0115a4c71a1db1143887d2ba60a20bd5, type: 2}
-  - {fileID: 11400000, guid: 10927d0bffb28af4eaa317c2b6458301, type: 2}
-  - {fileID: 11400000, guid: 6a65560b0799d324ea9c84300f3132e5, type: 2}
-  - {fileID: 11400000, guid: 74f24f4e345c7124ebff3318843b624c, type: 2}
-  - {fileID: 11400000, guid: 3612cdc5cf42d8e4fb1182128d493a68, type: 2}
+  - {fileID: 11400000, guid: 63076af011b274a4485d566d1ea80955, type: 2}
+  - {fileID: 11400000, guid: 9616aa14df05b0a4bb8a9371269f966e, type: 2}
+  - {fileID: 11400000, guid: 5ecb954d9f3ecb5488dca84141578904, type: 2}
+  - {fileID: 11400000, guid: 3dcfad53f5d25614fb6569bf8ca2d8a1, type: 2}
+  - {fileID: 11400000, guid: 6c2efc0c57b5d3c42b7c059800080ee2, type: 2}
+  - {fileID: 11400000, guid: 68b1796eda0cd9e4f8df93f6cef9718f, type: 2}
+  - {fileID: 11400000, guid: 7036b63ddc0d117448f7dd4a4c44e215, type: 2}
+  - {fileID: 11400000, guid: af25029694654ba4b89616f3b4d4c2a9, type: 2}
   Renderer: {fileID: 371658691}
 --- !u!1 &1865847158
 GameObject:

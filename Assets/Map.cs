@@ -43,4 +43,9 @@ public class Map<T>
     {
         return Width + ovsetWidth >= 0 && Width + ovsetWidth < Karte.GetLength(0) && Height + ovsetHeight >= 0 && Height + ovsetHeight < Karte.GetLength(1);
     }
+
+    public bool testR(int Width, int Height)
+    {
+        return Width + ovsetWidth == -1 || Width + ovsetWidth == Karte.GetLength(0) || Height + ovsetHeight == -1 || Height + ovsetHeight == Karte.GetLength(1);
+    }
 }

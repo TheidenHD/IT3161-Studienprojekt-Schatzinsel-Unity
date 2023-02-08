@@ -19,5 +19,9 @@ public class Team : Map<TileStatus>
             this[Width, Height] = map[Width, Height];
             hiden.SetTile(new Vector3Int(Width, Height, 0), null);
         }
+        else if (this.testR(Width, Height))
+        {
+            hiden.SetTile(new Vector3Int(Width, Height, 0), null);
+        }
     }
 }
