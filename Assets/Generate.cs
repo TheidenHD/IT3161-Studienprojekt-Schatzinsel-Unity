@@ -1,11 +1,7 @@
-using Newtonsoft.Json.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using static Map;
 
 public class Generate : MonoBehaviour
 {
@@ -31,20 +27,31 @@ public class Generate : MonoBehaviour
     private TileBase[] Tile;
     [SerializeField]
     private SpriteRenderer Renderer;
-    private Map nav;
+    private Map<TileStatus> nav;
     // Start is called before the first frame update
     void Start()
     {
         Map.ClearAllTiles();
         Objekts.ClearAllTiles();
         Renderer.size = new Vector2(Width, Height);
-        nav = new Map(Width - 2, Height - 2);
-        List<Team> team =  new List<Team>();
+        nav = new Map<TileStatus>(Width - 2, Height - 2);
+        List<(Team, List<Pirate>)> team =  new List<(Team, List<Pirate>)>();
         for (int i = 0; i < Teams; i++)
-            team.Add(new Team(Width - 2, Height - 2, nav, Hiden));
-        foreach (int i in Enumerable.Range(-9, 18))
         {
-            foreach (int j in Enumerable.Range(-4, 8))
+            Team t = new Team(Width - 2, Height - 2, nav, Hiden);
+            List<Pirate> temp = new List<Pirate>();
+            for (int j = 0; j < Pirates; j++)
+            {
+                Pirate ob = Instantiate(spawnobjekt).GetComponent<Pirate>();
+                ob.team = t;
+                ob.map = new Map<Element>(Width - 2, Height - 2);
+                temp.Add(ob);
+            }
+            team.Add((t, temp));
+        }
+        foreach (int i in Enumerable.Range((Width - 2) / -2, Width - 2))
+        {
+            foreach (int j in Enumerable.Range((Height - 2) / -2, Height - 2))
             {
                 Map.SetTile(new Vector3Int(i, j, 0), Tile[3]);
                 if (hide)
@@ -60,18 +67,15 @@ public class Generate : MonoBehaviour
                 {
                     nav[i, j] = TileStatus.Begehbar;
                 }
-                foreach(Team t in team)
-                    t[i, j] = TileStatus.Unbekant;
-            }
-        }
-        foreach (Team t in team)
-        {
-            for (int i = 0; i < Pirates; i++)
-            {
-                Pirate ob = Instantiate(spawnobjekt).GetComponent<Pirate>();
-                ob.team = t;
+                foreach ((Team, List<Pirate>) t in team)
+                {
+                    t.Item1[i, j] = TileStatus.Unbekant;
+                    foreach (Pirate p in t.Item2)
+                    {
+                        p.map[i, j] = new Element();
+                    }
+                }
             }
         }
     }
-
 }

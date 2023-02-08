@@ -1,26 +1,22 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Map
+public enum TileStatus
 {
-    public enum TileStatus
-    { 
-        Unbekant,
-        Wasser,
-        Begehbar,
-        Objekt
-    }
+    Unbekant,
+    Wasser,
+    Begehbar,
+    Objekt
+}
 
-    public class Element
-    {
-        public int Cost = -1;
-        public int Belonung = -1;
-        public Vector2Int Vorheriger;
-    }
-
-    private TileStatus[,] Karte;
+public class Element
+{
+    public int Cost = -1;
+    public int Belonung = -1;
+    public Vector2Int Vorheriger;
+}
+public class Map<T>
+{
+    private T[,] Karte;
     private int ovsetWidth;
     private int ovsetHeight;
 
@@ -28,10 +24,10 @@ public class Map
     {
         ovsetWidth = Width / 2;
         ovsetHeight = Height / 2;
-        Karte = new TileStatus[Width, Height];
+        Karte = new T[Width, Height];
     }
 
-    public TileStatus this[int Width, int Height]
+    public T this[int Width, int Height]
     {
         get
         {

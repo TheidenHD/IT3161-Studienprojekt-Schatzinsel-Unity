@@ -1,14 +1,12 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using static Map;
 
-public class Team : Map
+public class Team : Map<TileStatus>
 {
-    private Map map;
+    private Map<TileStatus> map;
     private Tilemap hiden;
 
-    public Team(int Width, int Height, Map map, Tilemap hiden) : base(Width, Height)
+    public Team(int Width, int Height, Map<TileStatus> map, Tilemap hiden) : base(Width, Height)
     {
         this.map = map;
         this.hiden = hiden;

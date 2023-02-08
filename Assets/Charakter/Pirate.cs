@@ -8,6 +8,7 @@ public class Pirate : MonoBehaviour
     public Animator animator;
     private int currentIndex;
     public Team team;
+    public Map<Element> map;
 
     private Vector3 destination;
 
@@ -19,6 +20,7 @@ public class Pirate : MonoBehaviour
         sicht = Random.Range(2, 5);
         speed = ((float)Random.Range(10, 21)) / 10;
         team.check((int)destination.x, (int)destination.y);
+        animator.SetFloat("Speed", speed);
     }
 
     void Update()
@@ -46,9 +48,18 @@ public class Pirate : MonoBehaviour
                 Vector3 temp = destination - transform.position;
                 animator.SetFloat("LEFT/RIGHT", temp.x);
                 animator.SetFloat("UP/Down", temp.y);
-
-
+            }
+            else
+            {
+                this.Generate();
             }
         }
+    }
+
+    private void Generate()
+    {
+        currentIndex = 0;
+        //Generate new Path
+        path = new Vector2[0];
     }
 }
