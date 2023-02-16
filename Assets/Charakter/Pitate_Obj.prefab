@@ -118,14 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be95334ab15286d44b5087eb46fe4da9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  path:
-  - {x: 1, y: 0}
-  - {x: 2, y: 0}
-  - {x: 2, y: 1}
-  - {x: 1, y: 1}
-  - {x: 1, y: 0}
-  - {x: 1, y: -1}
-  - {x: 1, y: -2}
-  - {x: 1, y: -3}
-  - {x: 1, y: -4}
+  path: []
   animator: {fileID: 7432023361345346329}

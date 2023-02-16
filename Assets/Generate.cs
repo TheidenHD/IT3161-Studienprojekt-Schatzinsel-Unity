@@ -33,6 +33,7 @@ public class Generate : MonoBehaviour
     {
         Map.ClearAllTiles();
         Objekts.ClearAllTiles();
+        Hiden.ClearAllTiles();
         Renderer.size = new Vector2(Width, Height);
         nav = new Map<TileStatus>(Width - 2, Height - 2);
         List<(Team, List<Pirate>)> team =  new List<(Team, List<Pirate>)>();
@@ -49,14 +50,16 @@ public class Generate : MonoBehaviour
             }
             team.Add((t, temp));
         }
-        foreach (int i in Enumerable.Range((Width - 2) / -2, Width - 2))
+        IEnumerable<int> enI = Enumerable.Range((Width - 2) / -2, Width - 2);
+        IEnumerable<int> enJ = Enumerable.Range((Height - 2) / -2, Height - 2);
+        foreach (int i in enI)
         {
-            foreach (int j in Enumerable.Range((Height - 2) / -2, Height - 2))
+            foreach (int j in enJ)
             {
-                Map.SetTile(new Vector3Int(i, j, 0), Tile[3]);
+                Map.SetTile(new Vector3Int(i, j), Tile[3]);
                 if (Random.Range(0, 100) > 95)
                 {
-                    Objekts.SetTile(new Vector3Int(i, j, 0), Tile[2]);
+                    Objekts.SetTile(new Vector3Int(i, j), Tile[2]);
                     nav[i, j] = TileStatus.Objekt;
                 }
                 else
@@ -68,12 +71,14 @@ public class Generate : MonoBehaviour
                     t.Item1[i, j] = TileStatus.Unbekant;
                     foreach (Pirate p in t.Item2)
                     {
-                        p.map[i, j] = new Element();
+                        p.map[i, j] = new Element(i, j);
                     }
                 }
             }
         }
-
+        Vector2Int target = new Vector2Int(Random.Range(enI.First(), enI.Last() + 1), Random.Range(enJ.First(), enJ.Last() + 1));
+        Objekts.SetTile(new Vector3Int(target.x, target.y), Tile[8]);
+        nav[target.x, target.y] = TileStatus.Schatz;
         if (hide)
         {
             foreach (int i in Enumerable.Range(Width / -2, Width))

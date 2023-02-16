@@ -398,7 +398,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -651,6 +651,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 68b1796eda0cd9e4f8df93f6cef9718f, type: 2}
   - {fileID: 11400000, guid: 7036b63ddc0d117448f7dd4a4c44e215, type: 2}
   - {fileID: 11400000, guid: af25029694654ba4b89616f3b4d4c2a9, type: 2}
+  - {fileID: 11400000, guid: 715723fe6eb716644a7ea1086aada2ac, type: 2}
   Renderer: {fileID: 371658691}
 --- !u!1 &1865847158
 GameObject:

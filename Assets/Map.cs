@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public enum TileStatus
@@ -5,7 +6,8 @@ public enum TileStatus
     Unbekant,
     Wasser,
     Begehbar,
-    Objekt
+    Objekt,
+    Schatz
 }
 
 public class Element
@@ -13,6 +15,11 @@ public class Element
     public int Cost = -1;
     public int Belonung = -1;
     public Vector2Int Vorheriger;
+    public readonly Vector2Int pos;
+    public Element(int Width, int Height)
+    { 
+        this.pos = new Vector2Int(Width, Height);
+    }
 }
 public class Map<T>
 {
@@ -39,6 +46,12 @@ public class Map<T>
             Karte[Width + ovsetWidth, Height + ovsetHeight] = value;
         }
     }
+
+    public IEnumerator GetEnumerator()
+    {
+        return Karte.GetEnumerator();
+    }
+
     public bool test(int Width, int Height)
     {
         return Width + ovsetWidth >= 0 && Width + ovsetWidth < Karte.GetLength(0) && Height + ovsetHeight >= 0 && Height + ovsetHeight < Karte.GetLength(1);
