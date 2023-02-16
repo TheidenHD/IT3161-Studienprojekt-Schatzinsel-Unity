@@ -639,6 +639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnobjekt: {fileID: 7432023361345346331, guid: c443caecaa9830640bf6d15170cdb523, type: 3}
+  Camera: {fileID: 519420031}
   Map: {fileID: 462525342}
   Objekts: {fileID: 1865847161}
   Hiden: {fileID: 685349572}

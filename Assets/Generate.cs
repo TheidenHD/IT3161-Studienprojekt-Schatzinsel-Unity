@@ -11,12 +11,15 @@ public class Generate : MonoBehaviour
     [SerializeField]
     public static int Width = 20;
     public static int pixel = 16;
+    public static int zoom = 5;
     [SerializeField]
     public static int Teams = 1;
     [SerializeField]
     public static int Pirates = 1;
     [SerializeField]
     public static bool hide = true;
+    [SerializeField]
+    private Camera Camera;
     [SerializeField]
     private Tilemap Map;
     [SerializeField]
@@ -34,30 +37,37 @@ public class Generate : MonoBehaviour
         Map.ClearAllTiles();
         Objekts.ClearAllTiles();
         Hiden.ClearAllTiles();
+
         Renderer.size = new Vector2(Width, Height);
         nav = new Map<TileStatus>(Width - 2, Height - 2);
+        this.Camera.orthographicSize = zoom;
+
         List<(Team, List<Pirate>)> team =  new List<(Team, List<Pirate>)>();
+
+        IEnumerable<int> enI = Enumerable.Range((Width - 2) / -2, Width - 2);
+        IEnumerable<int> enJ = Enumerable.Range((Height - 2) / -2, Height - 2);
+        Vector2Int PiratTarget = new Vector2Int(Random.Range(enI.First(), enI.Last() + 1), Random.Range(enJ.First(), enJ.Last() + 1));
+
         for (int i = 0; i < Teams; i++)
         {
             Team t = new Team(Width - 2, Height - 2, nav, Hiden);
             List<Pirate> temp = new List<Pirate>();
             for (int j = 0; j < Pirates; j++)
             {
-                Pirate ob = Instantiate(spawnobjekt).GetComponent<Pirate>();
+                Pirate ob = Instantiate(spawnobjekt, new Vector3(PiratTarget.x, PiratTarget.y), Quaternion.identity).GetComponent<Pirate>();
                 ob.team = t;
                 ob.map = new Map<Element>(Width - 2, Height - 2);
                 temp.Add(ob);
             }
             team.Add((t, temp));
         }
-        IEnumerable<int> enI = Enumerable.Range((Width - 2) / -2, Width - 2);
-        IEnumerable<int> enJ = Enumerable.Range((Height - 2) / -2, Height - 2);
+
         foreach (int i in enI)
         {
             foreach (int j in enJ)
             {
                 Map.SetTile(new Vector3Int(i, j), Tile[3]);
-                if (Random.Range(0, 100) > 95)
+                if (Random.Range(0, 100) > 95  && PiratTarget.x != i && PiratTarget.y != j)
                 {
                     Objekts.SetTile(new Vector3Int(i, j), Tile[2]);
                     nav[i, j] = TileStatus.Objekt;
@@ -76,7 +86,12 @@ public class Generate : MonoBehaviour
                 }
             }
         }
-        Vector2Int target = new Vector2Int(Random.Range(enI.First(), enI.Last() + 1), Random.Range(enJ.First(), enJ.Last() + 1));
+        Vector2Int target = PiratTarget;
+        while (target == PiratTarget)
+        {
+            target = new Vector2Int(Random.Range(enI.First(), enI.Last() + 1), Random.Range(enJ.First(), enJ.Last() + 1));
+
+        }
         Objekts.SetTile(new Vector3Int(target.x, target.y), Tile[8]);
         nav[target.x, target.y] = TileStatus.Schatz;
         if (hide)
