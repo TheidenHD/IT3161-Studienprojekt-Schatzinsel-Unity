@@ -7,6 +7,8 @@ public class Generate : MonoBehaviour
 {
     public GameObject spawnobjekt;
     [SerializeField]
+    public GameObject canvas;
+    [SerializeField]
     public static int Height = 10;
     [SerializeField]
     public static int Width = 20;
@@ -37,6 +39,7 @@ public class Generate : MonoBehaviour
         Map.ClearAllTiles();
         Objekts.ClearAllTiles();
         Hiden.ClearAllTiles();
+        Time.timeScale = 1.0f;
 
         Renderer.size = new Vector2(Width, Height);
         nav = new Map<TileStatus>(Width - 2, Height - 2);
@@ -103,6 +106,15 @@ public class Generate : MonoBehaviour
                     Hiden.SetTile(new Vector3Int(i, j, 0), Tile[7]);
                 }
             }
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Pause))
+        {
+            Time.timeScale = this.canvas.activeSelf ? 1 : 0;
+            this.canvas.SetActive(!this.canvas.activeSelf);
         }
     }
 }
